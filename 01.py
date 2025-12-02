@@ -11,12 +11,12 @@ t2 = 0
 for line in lines:
     n = int(line[1:])
 
-    op = lambda x: (x + 1) % 100
+    v = 1
     if line[0] == "L":
-        op = lambda x: (x - 1) % 100
+        v = -1
 
     for _ in range(n):
-        pos = op(pos)
+        pos = (pos + v) % 100
         if pos == 0:
             t2 += 1
     if pos == 0:
