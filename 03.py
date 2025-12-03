@@ -19,9 +19,12 @@ def fn(lc, num=12):
     return m
 
 
+def calc(lc):
+    return int(fn(lc, 2))
+
+
 def calcp2(lc):
-    m = fn(lc)
-    return int(m)
+    return int(fn(lc, 12))
 
 
 if __name__ == "__main__":
@@ -32,13 +35,10 @@ if __name__ == "__main__":
     lines = open(source).readlines()
 
     with Pool(None) as p:
-        p2 = sum(p.map(calcp2, (l.strip() for l in lines)))
+        p1 = sum(p.map(calc, (line.strip() for line in lines)))
 
-    # sum of maximum of 2 digits per line
-    for line in lines:
-        lc = line.strip()
-        m = max(int("".join(x)) for x in combinations(lc, 2))
-        p1 += m
+    with Pool(None) as p:
+        p2 = sum(p.map(calcp2, (line.strip() for line in lines)))
 
     print(p1)
     print(p2)
